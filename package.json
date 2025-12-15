@@ -1,0 +1,24 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brenofreitast/API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brenofreitast/API/issues"
+  },
+  "homepage": "https://github.com/brenofreitast/API#readme",
+  "description": "",
+  "type": "module",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
