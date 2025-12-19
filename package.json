@@ -1,10 +1,10 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "main": "api.js",
+  "main": "src/api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch api.js"
+    "dev": "node --watch src/api.js"
   },
   "repository": {
     "type": "git",

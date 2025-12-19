@@ -17,18 +17,12 @@
 */
 
 import express from "express"
-import mongoose from "mongoose"
 import User from "./models/User.js"
+import connectDatabase from "./database/db.js"
 
 const app = express()
 app.use(express.json())
 app.listen(3000)
-
-mongoose.connect("mongodb+srv://brenofreitast:bft-16079719@cluster0.4815e.mongodb.net/?appName=Cluster0")   // mongoose é uma Promisse
-.then(() => console.log('Banco de dados conectado.'))   // Para caso a conexao dê certo.
-.catch(() => console.log('Erro ao conectar ao banco de dados.'))    // Para caso a conexao dê errado.
-
-const users = ['Brenno', 'Ela']
 
 app.get("/users", async(req, res) => {
 
@@ -38,8 +32,9 @@ app.get("/users", async(req, res) => {
 
 app.delete("/users/:id", async(req, res) => {
     const {id} = req.params
+    const user = await User.findById(id)
     const users = await User.deleteOne({ _id: id})
-    return res.status(200).json( {message: 'Usuario deletado.'})
+    return res.status(200).json( {message: `Usuario ${user.name} deletado.`})
 })
 
 app.post("/users", async(req, res) => {
@@ -49,3 +44,11 @@ app.post("/users", async(req, res) => {
 
     return res.json(newUser)
 })
+
+connectDatabase()
+    .then(() => {   // Para caso a conexao dê certo.
+        app.listen(3000, () => {
+            console.log('Banco de dados conectado.')
+        })
+    })   
+    .catch(() => console.log('Erro ao conectar ao banco de dados.'))    // Para caso a conexao dê errado.
