@@ -17,33 +17,13 @@
 */
 
 import express from "express"
-import User from "./models/User.js"
 import connectDatabase from "./database/db.js"
+import routes from './routes.js'
 
 const app = express()
 app.use(express.json())
-app.listen(3000)
+app.use(routes)
 
-app.get("/users", async(req, res) => {
-
-    const users = await User.find()
-    return res.json(users)
-})
-
-app.delete("/users/:id", async(req, res) => {
-    const {id} = req.params
-    const user = await User.findById(id)
-    const users = await User.deleteOne({ _id: id})
-    return res.status(200).json( {message: `Usuario ${user.name} deletado.`})
-})
-
-app.post("/users", async(req, res) => {
-    const user = req.body
-    const newUser = await User.create(user)
-    return res.status(201).json({message: 'Usuario criado.'})
-
-    return res.json(newUser)
-})
 
 connectDatabase()
     .then(() => {   // Para caso a conexao dê certo.
