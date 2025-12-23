@@ -1,7 +1,9 @@
+import 'dotenv/config'
 import mongoose from "mongoose"
+const connectMongo = process.env.connectMongo
 
 async function connectDatabase() {
-    await mongoose.connect("mongodb+srv://brenofreitast:bft-16079719@cluster0.4815e.mongodb.net/?appName=Cluster0")   // mongoose é uma Promisse
+    await mongoose.connect(connectMongo)   // mongoose é uma Promisse
 
 }
 
